@@ -28,56 +28,69 @@ Note: This option does not exist yet for home-manager flake configurations.
 
 1. Boot from NixOS install media.  I am using NixOS 23.11 minimal install.
 
-2. Fetch partition setup and bootstrap configuration files
+2. If you need to setup WiFi, check the NixOS manual.  
+
+   ```bash
+   sudo systemctl start wpa_supplicant
+   wpa_cli
+       add_network
+       set_network 0 ssid "SID"
+       set_network 0 psk "PASSWORD"
+       set_network 0 key_mgmt WPA-PSK
+       enable_network 0 
+       quit
+   ```
+
+3. Fetch partition setup and bootstrap configuration files
 
    ```bash
     curl -sSL https://githubusercontent.com/jbgreer/Nixfiles/main/setup_partitions.sh
     curl -sSL https://githubusercontent.com/jbgreer/Nixfiles/main/pull_bootstrap.sh
    ```
 
-3. Set up partitions using ```sudo setup_partitions.sh```
+4. Set up partitions using ```sudo setup_partitions.sh```
    
-4. Generate configuration using ```sudo nixos-generate-config --root /mnt```
+5. Generate configuration using ```sudo nixos-generate-config --root /mnt```
 
-5. Pull the bootstrap config using ````pull_bootstrap.sh````
+6. Pull the bootstrap config using ````pull_bootstrap.sh````
 
-6. Install OS using ````sudo nixos-install````
+7. Install OS using ````sudo nixos-install````
 
-7. Reboot
+8. Reboot
 
-8. Create secureboot keys. These keys do not need to be enrolled yet if secure boot is not enabled.
+9. Create secureboot keys. These keys do not need to be enrolled yet if secure boot is not enabled.
 
    ```bash
    sudo sbctl create-keys
    ```
 
-9. Pull Impermanenace setup script 
+10. Pull Impermanenace setup script 
 
    ```bash
     curl -sSL https://githubusercontent.com/jbgreer/Nixfiles/main/setup_persist.sh
    ```
 
-10. Setup Impermanence using ````setup_persist.sh````
+11. Setup Impermanence using ````setup_persist.sh````
 
-11. Impermanence clears passwords stored in `/etc/shadow`, so recreate these in the persist subvolume for each user:
+12. Impermanence clears passwords stored in `/etc/shadow`, so recreate these in the persist subvolume for each user:
 
    ```bash
    mkpasswd --method=SHA-512 1>/persist/passwords/jbgreer
    ```
 
-12. Modify system configuration flake. 
+13. Modify system configuration flake. 
 
-13. Copy `/etc/nixos/hardware-configuration.nix` into the systems folder to match the hostname.
+14. Copy `/etc/nixos/hardware-configuration.nix` into the systems folder to match the hostname.
 
-14. Reboot again.
+15. Reboot again.
 
-15. Enroll secureboot keys.  This may require erasing UEFI secure boot settings.
+16. Enroll secureboot keys.  This may require erasing UEFI secure boot settings.
 
    ```bash
    sudo sbctl enroll-keys -- --microsoft
    ```
 
-16. Verify secure boot.  Sign files?
+17. Verify secure boot.  Sign files?
 
    ```bash
    sudo sbctl verify
@@ -86,7 +99,7 @@ Note: This option does not exist yet for home-manager flake configurations.
    sudo sbctl status
    ```
 
-17. Enable TPM unlocking using systemd-cryptenroll.
+18. Enable TPM unlocking using systemd-cryptenroll.
 
    ```bash
    sudo systemd-cryptenroll --tpm2-device=list
@@ -96,8 +109,7 @@ Note: This option does not exist yet for home-manager flake configurations.
    sudo systemd-cryptenroll --wipe-slot=tpm2 /dev/nvme0n1p2 --tpm2-device=auto --tpm2-pcrs=0+2+7
    ```
 
-18. Install home-manager and use flake for initial generation
+19. Install home-manager and use flake for initial generation
 
-19. If at first you don't succeed, you're about average.
-
+20. If at first you don't succeed, you're about average.
 
