@@ -3,49 +3,81 @@
 ## Modified from https://github.com/kjhoerr/dotfile.git
 ## Work in progress.  Use at your own discretion.  You have been warned.
 
-### Note: most of these steps require root
+## Goals:
+### Define all systems and user profiles under a common [flake.nix](./flake.nix). 
+### Update all systems targetting this flake via
+
+    ```bash
+    # Invoked off of current hostname
+    sudo nixos-rebuild --flake github:jbgreer/dotfiles switch
+    ```
+
+### Update user home configurations against this flake as well:
+
+    ```bash
+    # Invoked off of current username
+    home-manager --flake github:jbgreer/dotfiles switch
+    ```
+
+Auto-upgrade and garbage collection is enabled using the default daily frequency and targets `github:jbgreer/dotfiles` as above. 
+Note: This option does not exist yet for home-manager flake configurations.
+
+## Installation Note: most of these steps require root
+
+0. Download & burn installation media from https://nixos.org/download.html#nixos-iso
 
 1. Boot from NixOS install media.  I am using NixOS 23.11 minimal install.
 
-   https://nixos.org/download.html#nixos-iso
+2. Fetch partition setup and bootstrap configuration files
 
-2. Set up partitions using ```sudo setup_partitions.sh```
+   ```bash
+    curl -sSL https://githubusercontent.com/jbgreer/Nixfiles/main/setup_partitions.sh
+    curl -sSL https://githubusercontent.com/jbgreer/Nixfiles/main/pull_bootstrap.sh
+   ```
+
+3. Set up partitions using ```sudo setup_partitions.sh```
    
-3. Generate configuration  using ```sudo nixos-generate-config --root /mnt```
+4. Generate configuration using ```sudo nixos-generate-config --root /mnt```
 
-4. Pull the bootstrap config from this repository using ````pull_bootstrap.sh````
+5. Pull the bootstrap config using ````pull_bootstrap.sh````
 
-5. Install OS using ````sudo nixos-install````
+6. Install OS using ````sudo nixos-install````
 
-6. Reboot
+7. Reboot
 
-7. Create secureboot keys. These keys do not need to be enrolled yet if secure boot is not enabled.
+8. Create secureboot keys. These keys do not need to be enrolled yet if secure boot is not enabled.
 
    ```bash
    sudo sbctl create-keys
    ```
 
-7. Setup persistence using ````setup_persist.sh````
+9. Pull Impermanenace setup script 
 
-8. Impermanence clears passwords stored in `/etc/shadow`, so recreate these in the persist subvolume for each user:
+   ```bash
+    curl -sSL https://githubusercontent.com/jbgreer/Nixfiles/main/setup_persist.sh
+   ```
+
+10. Setup Impermanence using ````setup_persist.sh````
+
+11. Impermanence clears passwords stored in `/etc/shadow`, so recreate these in the persist subvolume for each user:
 
    ```bash
    mkpasswd --method=SHA-512 1>/persist/passwords/jbgreer
    ```
 
-9. Modify system configuration flake. 
+12. Modify system configuration flake. 
 
-10. Copy `/etc/nixos/hardware-configuration.nix` into the systems folder to match the hostname.
+13. Copy `/etc/nixos/hardware-configuration.nix` into the systems folder to match the hostname.
 
-10. Reboot again.
+14. Reboot again.
 
-11. Enroll secureboot keys.  This may require erasing UEFI secure boot settings.
+15. Enroll secureboot keys.  This may require erasing UEFI secure boot settings.
 
    ```bash
    sudo sbctl enroll-keys -- --microsoft
    ```
 
-13. Verify secure boot.  Sign files?
+16. Verify secure boot.  Sign files?
 
    ```bash
    sudo sbctl verify
@@ -54,7 +86,7 @@
    sudo sbctl status
    ```
 
-14. Enable TPM unlocking using systemd-cryptenroll.
+17. Enable TPM unlocking using systemd-cryptenroll.
 
    ```bash
    sudo systemd-cryptenroll --tpm2-device=list
@@ -64,7 +96,8 @@
    sudo systemd-cryptenroll --wipe-slot=tpm2 /dev/nvme0n1p2 --tpm2-device=auto --tpm2-pcrs=0+2+7
    ```
 
-15. Install home-manager and use flake for initial generation
+18. Install home-manager and use flake for initial generation
 
-16. If at first you don't succeed, you're about average.
+19. If at first you don't succeed, you're about average.
+
 

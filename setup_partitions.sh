@@ -1,16 +1,20 @@
 #$!env bash
 set -x
 
-# Set up partitions as desired. At least one fat32 for /boot or /boot/efi is needed along a main LUKS partition.
-parted /dev/nvme0n1
+# parition root and boot
+DISK=/dev/nvme0n1
+parted $DISK -- mklabel gpt
+parted $DISK -- mkpart root 512MB
+parted $DISK -- mkpart ESP fat32 1MB 512MB
+parted $DISK -- set 2 esp on
 
 # /boot
-mkfs.vfat -F32 /dev/nvme0n1p1
+mkfs.vfat -F32 $DISK'p1'
 
 # LUKS partition
-cryptsetup --verify-passphrase -v luksFormat /dev/nvme0n1p2
+cryptsetup --verify-passphrase -v luksFormat $DISK'p2'
 # >>> YES; create passphrase for LUKS partition
-cryptsetup open /dev/nvme0n1p2 enc
+cryptsetup open $DISK'p2' enc
 # re-enter passphrase to open LUKS partition for more partition management
 
 # Optionally, if you want to use LVM and set up additional partitions like swap, you can do the following, otherwise skip this block
@@ -49,4 +53,4 @@ mount -o subvol=home,compress=zstd,noatime /dev/pool/root /mnt/home
 mount -o subvol=nix,compress=zstd,noatime /dev/pool/root /mnt/nix
 mount -o subvol=persist,compress=zstd,noatime /dev/pool/root /mnt/persist
 mount -o subvol=log,compress=zstd,noatime /dev/pool/root /mnt/var/log
-mount /dev/nvme0n1p1 /mnt/boot
+mount $DISK'p1' /mnt/boot
