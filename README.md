@@ -7,17 +7,17 @@
 ### Define all systems and user profiles under a common [flake.nix](./flake.nix). 
 ### Update all systems targetting this flake via
 
-    ```bash
+   ```bash
     # Invoked off of current hostname
     sudo nixos-rebuild --flake github:jbgreer/dotfiles switch
-    ```
+   ```
 
 ### Update user home configurations against this flake as well:
 
-    ```bash
+   ```bash
     # Invoked off of current username
     home-manager --flake github:jbgreer/dotfiles switch
-    ```
+   ```
 
 Auto-upgrade and garbage collection is enabled using the default daily frequency and targets `github:jbgreer/dotfiles` as above. 
 Note: This option does not exist yet for home-manager flake configurations.
