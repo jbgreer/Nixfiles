@@ -10,12 +10,12 @@ parted $DISK -- set 2 esp on
 parted $DISK -- set 2 boot on
 
 # /boot
-mkfs.vfat -F32 $DISK'p1'
+mkfs.vfat -F32 $DISK'p2'
 
 # LUKS partition
-cryptsetup --verify-passphrase -v luksFormat $DISK'p2'
+cryptsetup --verify-passphrase -v luksFormat $DISK'p1'
 # >>> YES; create passphrase for LUKS partition
-cryptsetup open $DISK'p2' enc
+cryptsetup open $DISK'p1' enc
 # re-enter passphrase to open LUKS partition for more partition management
 
 # Optionally, if you want to use LVM and set up additional partitions like swap, you can do the following, otherwise skip this block
