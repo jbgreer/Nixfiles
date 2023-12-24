@@ -7,6 +7,7 @@ parted $DISK -- mklabel gpt
 parted $DISK -- mkpart root 512MB
 parted $DISK -- mkpart ESP fat32 1MB 512MB
 parted $DISK -- set 2 esp on
+parted $DISK -- set 2 boot on
 
 # /boot
 mkfs.vfat -F32 $DISK'p1'
