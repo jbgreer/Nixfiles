@@ -1,3 +1,4 @@
+#$!env bash
 set -x
 
 # Set up partitions as desired. At least one fat32 for /boot or /boot/efi is needed along a main LUKS partition.
@@ -49,4 +50,3 @@ mount -o subvol=nix,compress=zstd,noatime /dev/pool/root /mnt/nix
 mount -o subvol=persist,compress=zstd,noatime /dev/pool/root /mnt/persist
 mount -o subvol=log,compress=zstd,noatime /dev/pool/root /mnt/var/log
 mount /dev/nvme0n1p1 /mnt/boot
-

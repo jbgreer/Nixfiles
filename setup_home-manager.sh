@@ -1,3 +1,4 @@
+#!env bash
 set -x
 
 # home-manager isn't installed via OS config, and is on the user profile - if needed, install:
@@ -8,4 +9,3 @@ nix-shell '<home-manager>' -A install
 
 # Invoked off of current username
 home-manager --flake github:jbgreer/Nixfiles switch
-

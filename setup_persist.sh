@@ -1,3 +1,4 @@
+#!env bash
 set -x
 
 # Create directories to be mounted
@@ -16,4 +17,3 @@ mv {,/persist}/var/lib/NetworkManager/secret_key
 mv {,/persist}/var/lib/NetworkManager/seen-bssids
 mv {,/persist}/var/lib/NetworkManager/timestamps
 mv {,/persist}/var/lib/power-profiles-daemon/state.ini
-
