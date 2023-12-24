@@ -44,8 +44,8 @@ Note: This option does not exist yet for home-manager flake configurations.
 3. Fetch partition setup and bootstrap configuration files
 
    ```bash
-    curl -sSL https://githubusercontent.com/jbgreer/Nixfiles/main/setup_partitions.sh
-    curl -sSL https://githubusercontent.com/jbgreer/Nixfiles/main/pull_bootstrap.sh
+    curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/main/setup_partitions.sh > setup_partisions.sh
+    curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/main/pull_bootstrap.sh > pull_bootstrap.sh
    ```
 
 4. Set up partitions using ```sudo setup_partitions.sh```
@@ -67,7 +67,7 @@ Note: This option does not exist yet for home-manager flake configurations.
 10. Pull Impermanenace setup script 
 
    ```bash
-    curl -sSL https://githubusercontent.com/jbgreer/Nixfiles/main/setup_persist.sh
+    curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/main/setup_persist.sh > setup_persist.sh
    ```
 
 11. Setup Impermanence using ````setup_persist.sh````
