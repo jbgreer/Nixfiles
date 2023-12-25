@@ -27,12 +27,11 @@
   users.users.jbgreer = {
     isNormalUser = true;
     description = "Jim Greer";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       bind
-      git
-      #starship
       pfetch
+      wget
     ];
   };
 
