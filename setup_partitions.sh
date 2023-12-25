@@ -4,14 +4,14 @@ set -x
 # parition root and boot
 DISK=/dev/nvme0n1
 parted $DISK -- mklabel gpt
-parted $DISK -- mkpart root 512MB 100%
-parted $DISK -- mkpart ESP fat32 1MB 512MB
+parted $DISK -- mkpart ROOTPART 512MB 100%
+parted $DISK -- mkpart ESPPART fat32 1MB 512MB
 parted $DISK -- set 2 esp on
 parted $DISK -- set 2 boot on
 parted $DISK -- print all
 
 # /boot
-mkfs.vfat -F 32 -n BOOT -v $DISK'p2'
+mkfs.vfat -F 32 -n BOOTFS -v $DISK'p2'
 
 # LUKS partition
 cryptsetup --verify-passphrase -v luksFormat $DISK'p1'
@@ -24,9 +24,9 @@ cryptsetup open $DISK'p1' enc
 vgcreate pool /dev/mapper/enc
 # Create individual logical volumes
 lvcreate -n swap --size 32G pool
-mkswap -L SWAP --verbose /dev/pool/swap
+mkswap -L SWAPFS --verbose /dev/pool/swap
 lvcreate -n root --extents 100%FREE pool
-mkfs.btrfs -L ROOT --verbose /dev/pool/root
+mkfs.btrfs -L ROOTFS --verbose /dev/pool/root
 
 # Mount btrfs root partition to initialize subvolumes
 mount -t btrfs /dev/pool/root /mnt
