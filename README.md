@@ -73,33 +73,39 @@ Note: This option does not exist yet for home-manager flake configurations.
    sudo sbctl create-keys
    ```
 
-11. Pull Impermanenace setup script 
+11.  Reconnect to the network using NetworkManager
+
+   ```bash
+   ncli device wifi connect SID password PASSWD
+   ```
+
+12. Pull Impermanenace setup script 
 
    ```bash
     curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/main/setup_persist.sh > setup_persist.sh
    ```
 
-12. Setup Impermanence using ````setup_persist.sh````
+13. Setup Impermanence using ````setup_persist.sh````
 
-13. Impermanence clears passwords stored in `/etc/shadow`, so recreate these in the persist subvolume for each user:
+14. Impermanence clears passwords stored in `/etc/shadow`, so recreate these in the persist subvolume for each user:
 
    ```bash
    mkpasswd --method=SHA-512 1>/persist/passwords/jbgreer
    ```
 
-14. Modify system configuration flake. 
+15. Modify system configuration flake. 
 
-15. Copy `/etc/nixos/hardware-configuration.nix` into the systems folder to match the hostname.
+16. Copy `/etc/nixos/hardware-configuration.nix` into the systems folder to match the hostname.
 
-16. Reboot again.
+17. Reboot again.
 
-17. Enroll secureboot keys.  This may require erasing UEFI secure boot settings.
+18. Enroll secureboot keys.  This may require erasing UEFI secure boot settings.
 
    ```bash
    sudo sbctl enroll-keys -- --microsoft
    ```
 
-18. Verify secure boot.  Sign files?
+19. Verify secure boot.  Sign files?
 
    ```bash
    sudo sbctl verify
@@ -108,7 +114,7 @@ Note: This option does not exist yet for home-manager flake configurations.
    sudo sbctl status
    ```
 
-19. Enable TPM unlocking using systemd-cryptenroll.
+20. Enable TPM unlocking using systemd-cryptenroll.
 
    ```bash
    sudo systemd-cryptenroll --tpm2-device=list
@@ -118,7 +124,7 @@ Note: This option does not exist yet for home-manager flake configurations.
    sudo systemd-cryptenroll --wipe-slot=tpm2 /dev/nvme0n1p2 --tpm2-device=auto --tpm2-pcrs=0+2+7
    ```
 
-20. Install home-manager and use flake for initial generation
+21. Install home-manager and use flake for initial generation
 
-21. If at first you don't succeed, you're about average.
+22. If at first you don't succeed, you're about average.
 
