@@ -4,7 +4,7 @@ set -x
 # Create directories to be mounted
 mkdir -p /persist/etc/{NetworkManager/system-connections,nixos,secureboot}
 mkdir -p /persist/passwords
-mkdir -p /persist/var/lib/{bluetooth,colord,docker,fprint,NetworkManager,power-profiles-daemon,systemd,tailscale,upower}
+mkdir -p /persist/var/lib/{bluetooth,colord,fprint,NetworkManager,power-profiles-daemon,systemd,upower}
 
 # Copy any existing configuration items
 cp -R {,/persist}/etc/NetworkManager/system-connections

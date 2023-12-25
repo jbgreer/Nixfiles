@@ -23,11 +23,11 @@
   time.timeZone = "America/Chicago";
   i18n.defaultLocale = "en_US.utf8";
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account. Don't forget to change password
   users.users.jbgreer = {
     isNormalUser = true;
-    description = "Jim Greer";
     extraGroups = [ "networkmanager" "wheel" ];
+    initialHashedPassword = "password";
     packages = with pkgs; [
       bind
       pfetch
