@@ -24,7 +24,7 @@ Note: This option does not exist yet for home-manager flake configurations.
 
 ## Installation Note: most of these steps require root
 
-0. Download & burn installation media from https://nixos.org/download.html#nixos-iso
+0. Download & burn installation media from ```https://nixos.org/download.html#nixos-iso```
 
 1. Boot from NixOS install media.  I am using NixOS 23.11 minimal install.
 
@@ -41,56 +41,65 @@ Note: This option does not exist yet for home-manager flake configurations.
        quit
    ```
 
-3. Fetch partition setup and bootstrap configuration files
+3. Fetch partition setup script
 
    ```bash
-    curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/main/setup_partitions.sh > setup_partisions.sh
-    curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/main/pull_bootstrap.sh > pull_bootstrap.sh
+    curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/main/setup_partitions.sh -o setup_partisions.sh
    ```
 
 4. Set up partitions using ```sudo setup_partitions.sh```
    
 5. Generate configuration using ```sudo nixos-generate-config --root /mnt```
 
-6. Pull the bootstrap config using ````pull_bootstrap.sh````
+6. Edit ```/mnt/etc/nixos/configuration.nix``` or use the bootstrap version.
 
-7. Install OS using ````sudo nixos-install````
+   ```bash
+    curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/main/.config/nixos/systems/configuration_bootstrap.nix -o /mnt/etc/nixos/configuration.nix
+   ```
 
-8. Reboot
+7. Edit ```/mnt/etc/nixos/hardware-configuration.nix``` or insert boostrap_hardware.nix into it.
 
-9. Create secureboot keys. These keys do not need to be enrolled yet if secure boot is not enabled.
+   ```bash
+    curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/main/.config/nixos/systems/hardware_bootstrap.nix -o hardware_bootstrap.nix
+   ```
+
+8. Install OS using ````sudo nixos-install````
+
+9. Reboot
+
+10. Create secureboot keys. These keys do not need to be enrolled yet if secure boot is not enabled.
 
    ```bash
    sudo sbctl create-keys
    ```
 
-10. Pull Impermanenace setup script 
+11. Pull Impermanenace setup script 
 
    ```bash
     curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/main/setup_persist.sh > setup_persist.sh
    ```
 
-11. Setup Impermanence using ````setup_persist.sh````
+12. Setup Impermanence using ````setup_persist.sh````
 
-12. Impermanence clears passwords stored in `/etc/shadow`, so recreate these in the persist subvolume for each user:
+13. Impermanence clears passwords stored in `/etc/shadow`, so recreate these in the persist subvolume for each user:
 
    ```bash
    mkpasswd --method=SHA-512 1>/persist/passwords/jbgreer
    ```
 
-13. Modify system configuration flake. 
+14. Modify system configuration flake. 
 
-14. Copy `/etc/nixos/hardware-configuration.nix` into the systems folder to match the hostname.
+15. Copy `/etc/nixos/hardware-configuration.nix` into the systems folder to match the hostname.
 
-15. Reboot again.
+16. Reboot again.
 
-16. Enroll secureboot keys.  This may require erasing UEFI secure boot settings.
+17. Enroll secureboot keys.  This may require erasing UEFI secure boot settings.
 
    ```bash
    sudo sbctl enroll-keys -- --microsoft
    ```
 
-17. Verify secure boot.  Sign files?
+18. Verify secure boot.  Sign files?
 
    ```bash
    sudo sbctl verify
@@ -99,7 +108,7 @@ Note: This option does not exist yet for home-manager flake configurations.
    sudo sbctl status
    ```
 
-18. Enable TPM unlocking using systemd-cryptenroll.
+19. Enable TPM unlocking using systemd-cryptenroll.
 
    ```bash
    sudo systemd-cryptenroll --tpm2-device=list
@@ -109,7 +118,7 @@ Note: This option does not exist yet for home-manager flake configurations.
    sudo systemd-cryptenroll --wipe-slot=tpm2 /dev/nvme0n1p2 --tpm2-device=auto --tpm2-pcrs=0+2+7
    ```
 
-19. Install home-manager and use flake for initial generation
+20. Install home-manager and use flake for initial generation
 
-20. If at first you don't succeed, you're about average.
+21. If at first you don't succeed, you're about average.
 
