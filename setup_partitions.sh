@@ -19,10 +19,9 @@ cryptsetup --verify-passphrase -v luksFormat $DISK'p1'
 cryptsetup open $DISK'p1' enc
 # re-enter passphrase to open LUKS partition for more partition management
 
-# Optionally, if you want to use LVM and set up additional partitions like swap, you can do the following, otherwise skip this block
+# setup LVN, with root & swap logical volumes
 # Initialize volumegroup `pool`
 vgcreate pool /dev/mapper/enc
-# Create individual logical volumes
 lvcreate -n swap --size 32G pool
 mkswap -L SWAPFS --verbose /dev/pool/swap
 lvcreate -n root --extents 100%FREE pool
@@ -42,12 +41,7 @@ btrfs subvolume create /mnt/log
 btrfs subvolume snapshot -r /mnt/root /mnt/root-blank
 umount /mnt
 
-# Aliasing function to simplify typing if need be:
-# function pm { mount -o subvol=$1,compress=zstd,noatime /dev/pool/root /mnt/$2 ; }
-# `pm root`
-# `pm home home`
-# `pm log var/log`
-
+# mount paritions in preparation for installation
 mount -o subvol=root,compress=zstd,noatime /dev/pool/root /mnt/
 
 mkdir -p /mnt/{boot,home,nix,persist,var/log}
