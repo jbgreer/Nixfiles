@@ -1,4 +1,4 @@
-# bootstrap.nix
+# configuration_bootstrap.nix
 # Designed as first-boot configuration (bootstrap) for impermanence systems
 # Run nixos-generate-config --root=/mnt for hardware scan then overwrite with this as configuration.nix
 # Then you can reboot and get SecureBoot, TPM, /persist, and whatever else set up and use flakes to install

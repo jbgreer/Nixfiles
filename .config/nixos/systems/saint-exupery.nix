@@ -1,7 +1,7 @@
-# ariadne.nix
+# saint-exupery.nix
 { lib, pkgs, ... }: {
 
-  networking.hostName = "saint-exupery1";
+  networking.hostName = "saint-exupery";
 
   boot.kernelPackages = lib.mkForce pkgs.linuxPackages_testing;
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];

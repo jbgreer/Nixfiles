@@ -1,4 +1,4 @@
-# hardware-bootstrap.nix
+# hardware_bootstrap.nix
 
 # snippet for devices 
 
