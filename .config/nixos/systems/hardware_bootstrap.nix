@@ -2,8 +2,6 @@
 
 # snippet for devices 
 
-  networking.hostName = "saint-exupery";
-
   boot.initrd.luks.devices."enc" = {
     device = "/dev/disk/by-uuid/<ENC>";
     preLVM = true;
