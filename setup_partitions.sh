@@ -55,4 +55,4 @@ mount -o subvol=home,compress=zstd,noatime /dev/pool/root /mnt/home
 mount -o subvol=nix,compress=zstd,noatime /dev/pool/root /mnt/nix
 mount -o subvol=persist,compress=zstd,noatime /dev/pool/root /mnt/persist
 mount -o subvol=log,compress=zstd,noatime /dev/pool/root /mnt/var/log
-mount $DISK'p1' /mnt/boot
+mount $DISK'p2' /mnt/boot
