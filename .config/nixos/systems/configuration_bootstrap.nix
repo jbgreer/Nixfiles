@@ -15,7 +15,7 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
   hardware.enableAllFirmware = true;
 
-  # Enable networking
+  # Enable networking - set hostName
   networking.hostName = "tmp";
   networking.networkmanager.enable = true;
 
