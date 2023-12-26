@@ -51,7 +51,7 @@ Note: This option does not exist yet for home-manager flake configurations.
    
 5. Generate configuration using ```sudo nixos-generate-config --root /mnt```
 
-6. Edit ```/mnt/etc/nixos/configuration.nix``` or use the bootstrap version.
+6. Edit ```/mnt/etc/nixos/configuration.nix``` or use the bootstrap version.  Edit the hostname at least.
 
    ```bash
     curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/main/.config/nixos/systems/configuration_bootstrap.nix -o /mnt/etc/nixos/configuration.nix
