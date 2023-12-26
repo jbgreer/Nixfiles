@@ -43,6 +43,7 @@
   environment.systemPackages = with pkgs; [
     neovim
     gcc
+    git
     gnupg
     sbctl
     tpm2-tss

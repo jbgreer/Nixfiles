@@ -136,6 +136,7 @@
 
   environment.systemPackages = with pkgs; [
     dmidecode
+    git
     pciutils
     sbctl
     tpm2-tss
