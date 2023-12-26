@@ -16,7 +16,7 @@
 
    ```bash
     # Invoked off of current username
-    home-manager --flake github:jbgreer/dotfiles switch
+    home-manager --flake github:jbgreer/Nixfiles switch
    ```
 
 Auto-upgrade and garbage collection is enabled using the default daily frequency and targets `github:jbgreer/dotfiles` as above. 

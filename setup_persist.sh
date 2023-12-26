@@ -16,4 +16,4 @@ mv {,/persist}/etc/machine-id
 mv {,/persist}/var/lib/NetworkManager/secret_key
 mv {,/persist}/var/lib/NetworkManager/seen-bssids
 mv {,/persist}/var/lib/NetworkManager/timestamps
-mv {,/persist}/var/lib/power-profiles-daemon/state.ini
+#mv {,/persist}/var/lib/power-profiles-daemon/state.ini
