@@ -76,7 +76,7 @@ Note: This option does not exist yet for home-manager flake configurations.
 11.  Reconnect to the network using NetworkManager
 
    ```bash
-   ncli device wifi connect SID password PASSWD
+   nmcli device wifi connect SID password PASSWD
    ```
 
 12. Pull Impermanenace setup script 
