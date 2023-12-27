@@ -23,4 +23,4 @@ cp -R /etc/secureboot/* /persist/etc/secureboot/
 mv /etc/machine-id /persist/etc/machine-id
 mv /var/lib/NetworkManager/secret_key /persist/var/lib/NetworkManager/secret_key
 mv /var/lib/networkManager/seen-bssids /persist/var/lib/NetworkManager/seen-bssids
-mv /var/lib/NetworkMansager/timestampes /persist/var/lib/NetworkManager/timestamps
+mv /var/lib/NetworkManager/timestampes /persist/var/lib/NetworkManager/timestamps
