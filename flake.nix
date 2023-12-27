@@ -56,13 +56,13 @@
         inputs.lanzaboote.nixosModules.lanzaboote
         inputs.impermanence.nixosModules.impermanence
         inputs.nixos-hardware.nixosModules.common-hidpi
-	./.config/nixos/os/persist.nix
-	./.config/nixos/os/secure-boot.nix
-	./.config/nixos/os/system.nix
-	./.config/nixos/os/upgrade.nix
-	{
-	  nixpkgs.overlays = osOverlays;
-	}
+	      ./.config/nixos/os/persist.nix
+	      ./.config/nixos/os/secure-boot.nix
+	      ./.config/nixos/os/system.nix
+	      ./.config/nixos/os/upgrade.nix
+        {
+	        nixpkgs.overlays = osOverlays;
+	      }
       ];
 
       # fn for home config
