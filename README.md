@@ -9,7 +9,7 @@
 
    ```bash
     # Invoked off of current hostname
-    sudo nixos-rebuild --flake github:jbgreer/dotfiles switch
+    sudo nixos-rebuild --flake github:jbgreer/Nixfiles switch
    ```
 
 ### Update user home configurations against this flake as well:
