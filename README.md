@@ -9,17 +9,17 @@
 
    ```bash
     # Invoked off of current hostname
-    sudo nixos-rebuild --flake github:jbgreer/Nixfiles switch
+    sudo nixos-rebuild --flake github:jbgreer/Nixfiles/impermanence switch
    ```
 
 ### Update user home configurations against this flake as well:
 
    ```bash
     # Invoked off of current username
-    home-manager --flake github:jbgreer/Nixfiles switch
+    home-manager --flake github:jbgreer/Nixfiles/impermanence switch
    ```
 
-Auto-upgrade and garbage collection is enabled using the default daily frequency and targets `github:jbgreer/dotfiles` as above. 
+Auto-upgrade and garbage collection is enabled using the default daily frequency and targets `github:jbgreer/Nixfiles/impermanence` as above. 
 Note: This option does not exist yet for home-manager flake configurations.
 
 ## Installation Note: most of these steps require root
@@ -44,23 +44,23 @@ Note: This option does not exist yet for home-manager flake configurations.
 3. Fetch partition setup script
 
    ```bash
-    curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/main/setup_partitions.sh -o setup_partisions.sh
+    curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/impermanence/install.sh -o install.sh
    ```
 
-4. Set up partitions using ```sudo setup_partitions.sh```
+4. Set up partitions using ```sudo install.sh```
    
 5. Generate configuration using ```sudo nixos-generate-config --root /mnt```
 
 6. Edit ```/mnt/etc/nixos/configuration.nix``` or use the bootstrap version.  Edit the hostname at least.
 
    ```bash
-    curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/main/.config/nixos/systems/configuration_bootstrap.nix -o /mnt/etc/nixos/configuration.nix
+    sudo curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/impermanence/.config/nixos/systems/configuration_bootstrap.nix -o /mnt/etc/nixos/configuration.nix
    ```
 
 7. Edit ```/mnt/etc/nixos/hardware-configuration.nix``` or insert boostrap_hardware.nix into it.
 
    ```bash
-    curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/main/.config/nixos/systems/hardware_bootstrap.nix -o hardware_bootstrap.nix
+    curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/impermanence/.config/nixos/systems/hardware_bootstrap.nix -o hardware_bootstrap.nix
    ```
 
 8. Install OS using ````sudo nixos-install````
@@ -73,10 +73,10 @@ Note: This option does not exist yet for home-manager flake configurations.
    nmcli device wifi connect SID password PASSWD
    ```
 
-11. Pull Impermanenace setup script 
+11. Pull Impermanence setup script 
 
    ```bash
-    curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/main/setup_persist.sh > setup_persist.sh
+    curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/impermanence/setup_persist.sh > setup_persist.sh
    ```
 
 12. Setup Impermanence using ````setup_persist.sh````
