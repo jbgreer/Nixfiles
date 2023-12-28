@@ -49,3 +49,5 @@ sudo mount -o subvol=nix,compress=zstd,noatime /dev/pool/root /mnt/nix
 sudo mount -o subvol=persist,compress=zstd,noatime /dev/pool/root /mnt/persist
 sudo mount -o subvol=log,compress=zstd,noatime /dev/pool/root /mnt/var/log
 sudo mount $DISK'p2' /mnt/boot
+
+sudo nixos-generate-config --root /mnt
