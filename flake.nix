@@ -3,12 +3,6 @@
     nixos-pkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-    # secure boot
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.3.0";
-      inputs.nixpkgs.follows = "nixos-pkgs";
-    };
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixos-pkgs";
@@ -53,11 +47,9 @@
       ];
 
       osModules = [
-        inputs.lanzaboote.nixosModules.lanzaboote
         inputs.impermanence.nixosModules.impermanence
         inputs.nixos-hardware.nixosModules.common-hidpi
 	      ./.config/nixos/os/persist.nix
-	      ./.config/nixos/os/secure-boot.nix
 	      ./.config/nixos/os/system.nix
 	      ./.config/nixos/os/upgrade.nix
         {
@@ -80,13 +72,10 @@
     in {
 
       homeConfigurations = {
-
         jbgreer = homeUser [ ./.config/nixos/users/jbgreer.nix ];
-
       }; 
 
       nixosConfigurations = {
-
         saint-exupery = nixosSystem [
           inputs.nixos-hardware.nixosModules.framework-13-7040-amd
           ./.config/nixos/systems/saint-exupery.nix

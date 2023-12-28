@@ -1,17 +1,14 @@
-#!env bash
 set -x
 
 # Create directories to be mounted
 mkdir -p /persist/etc/NetworkManager/system-connections
 mkdir -p /persist/etc/nixos
-mkdir -p /persist/etc/secureboot
 mkdir -p /persist/passwords
 mkdir -p /persist/var/lib/bluetooth
-mkdir -p /persist/var/lib/colord
 mkdir -p /persist/var/lib/fprint
 mkdir -p /persist/var/lib/NetworkManager
 mkdir -p /persist/var/lib/power-profiles-daemon
-mkdir -p /persist/var/lib/systemd,upower
+mkdir -p /persist/var/lib/systemd
 mkdir -p /persist/var/lib/upower
 
 # Copy any existing configuration items

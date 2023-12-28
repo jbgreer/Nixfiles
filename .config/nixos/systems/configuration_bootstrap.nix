@@ -27,7 +27,6 @@
   users.users.jbgreer = {
     isNormalUser = true;
     extraGroups = [ "networkmanager" "wheel" ];
-    initialHashedPassword = "password";
     packages = with pkgs; [
       bind
       pfetch
@@ -45,8 +44,6 @@
     gcc
     git
     gnupg
-    sbctl
-    tpm2-tss
     git
   ];
 

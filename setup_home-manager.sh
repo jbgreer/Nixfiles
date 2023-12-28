@@ -1,4 +1,3 @@
-#!env bash
 set -x
 
 # home-manager isn't installed via OS config, and is on the user profile - if needed, install:

@@ -1,4 +1,3 @@
-#$!env bash
 set -x
 
 # parition root and boot

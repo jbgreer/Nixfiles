@@ -124,14 +124,10 @@ in {
   # symlinks to enable "erase your darlings"
   environment.persistence."/persist" = {
     directories = [
-      "/etc/secureboot"
       "/etc/NetworkManager/system-connections"
       "/var/lib/bluetooth"
-      "/var/lib/colord"
-      #"/var/lib/docker"
       "/var/lib/fprint"
       "/var/lib/power-profiles-daemon"
-      #"/var/lib/tailscale"
       "/var/lib/upower"
       "/var/lib/systemd/coredump"
     ];

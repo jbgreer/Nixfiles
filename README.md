@@ -1,4 +1,4 @@
-# Secure, persistent NixOS Setup using LVM, btrfs, and Impermanence.
+# Encrypted persistent NixOS Setup using LUKS, LVM, btrfs, and Impermanence.
 
 ## Modified from https://github.com/kjhoerr/dotfile.git
 ## Work in progress.  Use at your own discretion.  You have been warned.
@@ -67,64 +67,35 @@ Note: This option does not exist yet for home-manager flake configurations.
 
 9. Reboot
 
-10. Create secureboot keys. These keys do not need to be enrolled yet if secure boot is not enabled.
-
-   ```bash
-   sudo sbctl create-keys
-   ```
-
-11.  Reconnect to the network using NetworkManager
+10.  Reconnect to the network using NetworkManager
 
    ```bash
    nmcli device wifi connect SID password PASSWD
    ```
 
-12. Pull Impermanenace setup script 
+11. Pull Impermanenace setup script 
 
    ```bash
     curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/main/setup_persist.sh > setup_persist.sh
    ```
 
-13. Setup Impermanence using ````setup_persist.sh````
+12. Setup Impermanence using ````setup_persist.sh````
 
-14. Impermanence clears passwords stored in `/etc/shadow`, so recreate these in the persist subvolume for each user:
+13. Impermanence clears passwords stored in `/etc/shadow`, so recreate these in the persist subvolume for each user:
 
    ```bash
    mkpasswd --method=SHA-512 1>/persist/passwords/jbgreer
    ```
 
-15. Modify system configuration flake. 
+14. Modify system configuration flake. 
 
-16. Copy `/etc/nixos/hardware-configuration.nix` into the systems folder to match the hostname.
+TODO
 
-17. Reboot again.
+15. Copy `/etc/nixos/hardware-configuration.nix` into the systems folder to match the hostname.
 
-18. Enroll secureboot keys.  This may require erasing UEFI secure boot settings.
+16. Reboot again.
 
-   ```bash
-   sudo sbctl enroll-keys -- --microsoft
-   ```
-
-19. Verify secure boot.  Sign files?
-
-   ```bash
-   sudo sbctl verify
-   sudo sbctl sign -s /boot/vmlinuz-linux
-   sudo sbctl sign -s /boot/EFI/BOOT/BOOTX64.EFI
-   sudo sbctl status
-   ```
-
-20. Enable TPM unlocking using systemd-cryptenroll.
-
-   ```bash
-   sudo systemd-cryptenroll --tpm2-device=list
-  # And added to a device's configuration:
-  # boot.initrd.kernelModules = [ "tpm_tis" ];
-  # Must be enabled by hand - e.g.
-   sudo systemd-cryptenroll --wipe-slot=tpm2 /dev/nvme0n1p2 --tpm2-device=auto --tpm2-pcrs=0+2+7
-   ```
-
-21. Install home-manager and use flake for initial generation
+17. Install home-manager and use flake for initial generation
 
 22. If at first you don't succeed, you're about average.
 
