@@ -3,7 +3,7 @@
 
   # Enable automatic upgrades through this flake repository
   system.autoUpgrade.enable = lib.mkDefault true;
-  system.autoUpgrade.flake = lib.mkDefault "github:jbreer/Nixfiles";
+  system.autoUpgrade.flake = lib.mkDefault "github:jbreer/Nixfiles/persist";
 
   # Since automatic updates are enabled, automatically gc older generations
   # To note, this will gc home-manager user profiles as well
