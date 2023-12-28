@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
 # btrfs_fs_diff.sh
 # from https://mt-caret.github.io/blog/posts/2020-06-29-optin-state.html
 
+set -x
 set -euo pipefail
 
 OLD_TRANSID=$(sudo btrfs subvolume find-new /mnt/root-blank 9999999)

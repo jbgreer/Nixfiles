@@ -51,3 +51,10 @@ sudo mount -o subvol=log,compress=zstd,noatime /dev/pool/root /mnt/var/log
 sudo mount $DISK'p2' /mnt/boot
 
 sudo nixos-generate-config --root /mnt
+
+sudo curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/persist/configuration_bootstrap.nix -o /mnt/etc/nixos/configuration.nix
+
+echo "What is the hostname?"
+read hostname
+
+sudo sed -i "s/HOSTNAME/$hostname" /mnt/etc/nixos/configuration.nix

@@ -16,7 +16,7 @@
   hardware.enableAllFirmware = true;
 
   # Enable networking - set hostName
-  networking.hostName = "tmp";
+  networking.hostName = "HOSTNAME";
   networking.networkmanager.enable = true;
 
   # Set your time zone.
