@@ -105,7 +105,6 @@
   programs.neovim.enable = true;
   programs.neovim.defaultEditor = true;
 
-  #services.gnome.gnome-keyring.enable = lib.mkForce false;
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
@@ -115,5 +114,4 @@
 
   nix.settings.experimental-features = "nix-command flakes";
 }
-
 

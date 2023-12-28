@@ -44,7 +44,6 @@
     gcc
     git
     gnupg
-    git
   ];
 
   programs.neovim.enable = true;
