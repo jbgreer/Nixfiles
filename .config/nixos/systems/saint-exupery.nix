@@ -112,7 +112,6 @@
   environment.systemPackages = with pkgs; [
     dmidecode
     git
-    neovim
     pciutils
   ];
 

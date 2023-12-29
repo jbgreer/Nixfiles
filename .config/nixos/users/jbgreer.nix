@@ -6,8 +6,8 @@
   home.homeDirectory = "/home/jbgreer";
 
   home.packages = with pkgs; [
-    # package list here
-    neovim
+    neofetch
+    openssh
   ];
 
   home.stateVersion = "23.11";
