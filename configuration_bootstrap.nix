@@ -10,7 +10,7 @@
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
-  boot.supportedFilesystems = [ "btrfs" "ntfs" ];
+  boot.supportedFilesystems = [ "btrfs" "ntfs" "fat32" ];
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   hardware.enableAllFirmware = true;
