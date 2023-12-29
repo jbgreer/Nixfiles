@@ -6,7 +6,7 @@
     package = lib.mkDefault pkgs.gitAndTools.gitFull;
     userName = lib.mkDefault "James B Greer";
     userEmail = lib.mkDefault "jbgreer@gmail.com";
-    signing.key = lib.mkDefault "607574694C77731C"";
+    signing.key = lib.mkDefault "607574694C77731C";
     signing.signByDefault = lib.mkDefault true;
     extraConfig.init.defaultBranch = "main";
     extraConfig.core.editor = "nvim";
