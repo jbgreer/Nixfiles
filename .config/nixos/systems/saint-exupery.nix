@@ -19,7 +19,13 @@
       "cpufreq.default_governor=powersave"
       "initcall_blacklist=cpufreq_gov_userspace_init"
     ];
+    loader.efi.canTouchEfiVariables = true;
+    loader.systemd-boot.enable = true;
+    supportedFilesystems = [ "btrfs" "ntfs" "fat32" ];
   };
+
+  nixpkgs.config.allowUnfree = true;
+  hardware.enableAllFirmware = true;
 
   fileSystems."/" =
     { device = "/dev/disk/by-label/ROOTFS";
