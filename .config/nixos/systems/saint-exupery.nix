@@ -3,15 +3,22 @@
 
   networking.hostName = "saint-exupery";
 
-  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
-  boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
-
-  boot.initrd.luks.devices."enc" = {
-    device = "/dev/disk/by-partlabel/ROOTPART";
-    preLVM = true;
+  boot = {
+    extraModulePackages = [ ];
+    initrd = {
+      availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
+      kernelModules = [ "dm-snapshot" ];
+      luks.devices."enc" = {
+        device = "/dev/disk/by-partlabel/ROOTPART";
+        preLVM = true;
+      };
+    };
+    kernelModules = [ "kvm-amd" ];
+    kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
+    kernelParams = [
+      "cpufreq.default_governor=powersave"
+      "initcall_blacklist=cpufreq_gov_userspace_init"
+    ];
   };
 
   fileSystems."/" =
@@ -59,12 +66,12 @@
   hardware.cpu.amd.updateMicrocode = true;
 
   # Enable LVFS testing to get UEFI updates
-  services.fwupd.extraRemotes = [ "lvfs-testing" ];
+  # Enable firmware updates 
+  services.fwupd = {
+    enable = true;
+    extraRemotes = [ "lvfs-testing" ];
+  };
 
-  boot.kernelParams = [
-    "cpufreq.default_governor=powersave"
-    "initcall_blacklist=cpufreq_gov_userspace_init"
-  ];
 
   security.pam.services.login.fprintAuth = false;
   # similarly to how other distributions handle the fingerprinting login
@@ -87,28 +94,40 @@
     isNormalUser = true;
     description = "Jim Greer";
     extraGroups = [ "networkmanager" "wheel" ];
-    hashedPasswordFile = "/persist/passwords/jbgreer";
   };
+  
+  # packages for root that would otherwise be in home-manager
+  users.users.root.packages = with pkgs; [
+    bind
+    git
+    neovim
+  ];
 
   environment.systemPackages = with pkgs; [
     dmidecode
     git
+    neovim
     pciutils
   ];
 
   networking.useDHCP = lib.mkDefault true;
+
+  # this enables use of 5GHz in the US
   hardware.wirelessRegulatoryDatabase = true;
   boot.extraModprobeConfig = ''
     options cfg80211 ieee80211_regdom="US"
   '';
 
-  programs.neovim.enable = true;
-  programs.neovim.defaultEditor = true;
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
 
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
   };
+
 
   system.stateVersion = "23.11";
 

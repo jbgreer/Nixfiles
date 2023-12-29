@@ -1,4 +1,4 @@
-# Encrypted persistent NixOS Setup using LUKS, LVM, btrfs, and Impermanence.
+# Encrypted NixOS Setup using LUKS, LVM, btrfs
 
 ## Modified from https://github.com/kjhoerr/dotfile.git
 ## Work in progress.  Use at your own discretion.  You have been warned.
@@ -9,17 +9,17 @@
 
    ```bash
     # Invoked off of current hostname
-    sudo nixos-rebuild --flake github:jbgreer/Nixfiles/persist switch
+    sudo nixos-rebuild --flake github:jbgreer/Nixfiles/basic switch
    ```
 
 ### Update user home configurations against this flake as well:
 
    ```bash
     # Invoked off of current username
-    home-manager --flake github:jbgreer/Nixfiles/persist switch
+    home-manager --flake github:jbgreer/Nixfiles/basic switch
    ```
 
-Auto-upgrade and garbage collection is enabled using the default daily frequency and targets `github:jbgreer/Nixfiles/persist` as above. 
+Auto-upgrade and garbage collection is enabled using the default daily frequency and targets `github:jbgreer/Nixfiles/basic` as above. 
 Note: This option does not exist yet for home-manager flake configurations.
 
 ## Installation Note: most of these steps require root
@@ -68,29 +68,26 @@ Note: This option does not exist yet for home-manager flake configurations.
 
 9. Reboot
 
+10. Login as root
+
+10. Set password for non-root user
+
+   ```bash
+    passwd USER
+   ```
+
+11. Logout and back in as USER
+
 10.  Reconnect to the network using NetworkManager
 
    ```bash
    nmcli device wifi connect SID password PASSWD
    ```
 
-11. Pull persist setup script 
-
-   ```bash
-    curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/persist/setup_persist.sh > setup_persist.sh
-   ```
-
-12. Setup Impermanence using ````setup_persist.sh````
-
-13. Impermanence clears passwords stored in `/etc/shadow`, so recreate these in the persist subvolume for each user:
-
-   ```bash
-   mkpasswd --method=SHA-512 1>/persist/passwords/jbgreer
-   ```
+TODO
 
 14. Modify system configuration flake. 
 
-TODO
 
 15. Copy `/etc/nixos/hardware-configuration.nix` into the systems folder to match the hostname.
 

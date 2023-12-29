@@ -7,6 +7,7 @@
 
   home.packages = with pkgs; [
     # package list here
+    neovim
   ];
 
   home.stateVersion = "23.11";

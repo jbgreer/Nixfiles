@@ -8,9 +8,6 @@
       inputs.nixpkgs.follows = "nixos-pkgs";
     };
 
-    # persistence
-    impermanence.url = "github:nix-community/impermanence";
-
     # speccific module suport for hardware
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
  
@@ -40,16 +37,11 @@
         ./.config/nixos/home/tui.nix
       ];
 
-      guiModules = [
-      ];
- 
       serverHomeModules = [
       ];
 
       osModules = [
-        inputs.impermanence.nixosModules.impermanence
         inputs.nixos-hardware.nixosModules.common-hidpi
-	      ./.config/nixos/os/persist.nix
 	      ./.config/nixos/os/system.nix
 	      ./.config/nixos/os/upgrade.nix
         {
@@ -61,7 +53,6 @@
       homeUser = (userModules: inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = homeModules ++ userModules;
-        #modules = homeModules ++ guiModules ++ userModules;
       });
 
       # fn for nixos config 
@@ -80,7 +71,7 @@
         saint-exupery = nixosSystem [
           inputs.nixos-hardware.nixosModules.framework-13-7040-amd
           ./.config/nixos/systems/saint-exupery.nix
-        ];
       };
+        ];
     };
 }
