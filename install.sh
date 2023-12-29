@@ -57,4 +57,4 @@ sudo curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/persist/config
 echo "What is the hostname?"
 read hostname
 
-sudo sed -i "s/HOSTNAME/$hostname" /mnt/etc/nixos/configuration.nix
+sudo sed -i "s/HOSTNAME/$hostname/" /mnt/etc/nixos/configuration.nix
