@@ -36,13 +36,15 @@
   environment.systemPackages = with pkgs; [
     curl
     git
-    vim
+    neovim
   ];
 
-  # set vim as default editor
-  programs.vim.enable = true;
-  programs.vim.defaultEditor = true;
-
+  # set neovim as default editor
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
+  
   # WARNING! Be careful when changing.
   system.stateVersion = "23.11";
 
