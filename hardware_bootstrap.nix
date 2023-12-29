@@ -1,12 +1,12 @@
 # hardware_bootstrap.nix
 
-# snippet for devices 
-
+  # encrypted root partition
   boot.initrd.luks.devices."enc" = {
     device = "/dev/disk/by-partlabel/ROOTPART";
     preLVM = true;
   };
 
+  # btrfs subvolumes on rootfs
   fileSystems."/" =
     { device = "/dev/disk/by-label/ROOTFS";
       fsType = "btrfs";
@@ -39,6 +39,7 @@
       neededForBoot = true;
     };
 
+  # UEFI boot fs
   fileSystems."/boot" =
     { device = "/dev/disk/by-label/BOOTFS";
       fsType = "vfat";
@@ -47,3 +48,4 @@
   swapDevices =
     [ { device = "/dev/disk/by-label/SWAPFS"; }
     ];
+

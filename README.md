@@ -28,7 +28,9 @@ Note: This option does not exist yet for home-manager flake configurations.
 
 1. Boot from NixOS install media.  I am using NixOS 23.11 minimal install.
 
-2. If you need to setup WiFi, check the NixOS manual.  
+2. Login as nixos
+
+3. If you need to setup WiFi, check the NixOS manual.  
 
    ```bash
    sudo systemctl start wpa_supplicant
@@ -41,14 +43,13 @@ Note: This option does not exist yet for home-manager flake configurations.
        quit
    ```
 
-3. Fetch partition setup script
+4. Setup partitions by fetching the partition setup script and running
 
    ```bash
     curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/persist/install.sh -o install.sh
+    sh ./install
    ```
 
-4. Set up partitions using ```sudo install.sh```
-   
 5. Generate configuration using ```sudo nixos-generate-config --root /mnt```
 
 6. Edit ```/mnt/etc/nixos/configuration.nix``` or use the bootstrap version.  Edit the hostname at least.
@@ -60,7 +61,7 @@ Note: This option does not exist yet for home-manager flake configurations.
 7. Edit ```/mnt/etc/nixos/hardware-configuration.nix``` or insert boostrap_hardware.nix into it.
 
    ```bash
-    curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/persist/.config/nixos/systems/hardware_bootstrap.nix -o hardware_bootstrap.nix
+    curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/persist/hardware_bootstrap.nix -o hardware_bootstrap.nix
    ```
 
 8. Install OS using ````sudo nixos-install````
