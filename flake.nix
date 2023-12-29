@@ -71,7 +71,7 @@
         saint-exupery = nixosSystem [
           inputs.nixos-hardware.nixosModules.framework-13-7040-amd
           ./.config/nixos/systems/saint-exupery.nix
-      };
         ];
+      };
     };
 }
