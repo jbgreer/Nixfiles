@@ -10,7 +10,7 @@
   home.packages = lib.mkBefore (with pkgs; [
     file
     ripgrep
-    ag
+    silver-searcher
   ]);
 }
 
