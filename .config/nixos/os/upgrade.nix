@@ -4,7 +4,7 @@
   # Enable automatic upgrades through this flake repository
   system.autoUpgrade = {
     enable = lib.mkDefault true;
-    autoUpgrade.flake = lib.mkDefault "github:jbreer/Nixfiles/basic";
+    flake = lib.mkDefault "github:jbreer/Nixfiles/basic";
   };
 
   # Since automatic updates are enabled, automatically gc older generations
@@ -15,7 +15,7 @@
   };
 
   # Enable nix-community public binary cache, for potential build skips on flakes
-  nix.settings = }
+  nix.settings = {
     substituters = lib.mkDefault [ "https://nix-community.cachix.org" "https://cache.nixos.org/" ];
     trusted-public-keys = lib.mkDefault [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
   };

@@ -5,8 +5,10 @@
   time.timeZone = "America/Chicago";
   i18n.defaultLocale = "en_US.utf8";
 
-  networking.useDHCP = lib.mkDefault true;
-  networking.networkmanager.enable = true;
+  networking = {
+    useDHCP = lib.mkDefault true;
+    networkmanager.enable = true;
+  };
 
   environment.systemPackages = (with pkgs; [
     git

@@ -86,14 +86,22 @@ Note: This option does not exist yet for home-manager flake configurations.
 
 TODO
 
-14. Modify system configuration flake. 
-
+14. Modify ```/etc/nixos/configuration.nix```.
 
 15. Copy `/etc/nixos/hardware-configuration.nix` into the systems folder to match the hostname.
 
 16. Reboot again.
 
-17. Install home-manager and use flake for initial generation
+17. Install Home Manager
 
-22. If at first you don't succeed, you're about average.
+   ```bash
+   nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz home-manager
+   nix-channel --update
+   # you will likely to to logout and back in
+   nix-shell '<home-manager>' -A install
+   ```
+
+18. Use flake for initial generation
+
+If at first you don't succeed, you're about average.
 

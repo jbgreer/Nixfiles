@@ -88,7 +88,7 @@
   '';
 
   # User accounts
-  users.mutableUsers = false;
+  users.mutableUsers = true;
 
   users.users.jbgreer = {
     isNormalUser = true;
