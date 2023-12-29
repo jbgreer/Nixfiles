@@ -60,7 +60,8 @@
       # fn for home config
       homeUser = (userModules: inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = homeModules ++ guiModules ++ userModules;
+        modules = homeModules ++ userModules;
+        #modules = homeModules ++ guiModules ++ userModules;
       });
 
       # fn for nixos config 
