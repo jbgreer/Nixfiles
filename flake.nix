@@ -76,6 +76,7 @@
 
         mcewan = nixosSystem [
           ./.config/nixos/systems/mcewan.nix
+        ];
 
       };
     };
