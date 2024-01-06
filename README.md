@@ -46,39 +46,31 @@ Note: This option does not exist yet for home-manager flake configurations.
 4. Setup partitions by fetching the partition setup script and running
 
    ```bash
-    curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/persist/install.sh -o install.sh
+    curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/basic/install.sh -o install.sh
     sh ./install
    ```
 
-5. Generate configuration using ```sudo nixos-generate-config --root /mnt```
-
-6. Edit ```/mnt/etc/nixos/configuration.nix``` or use the bootstrap version.  Edit the hostname at least.
+5. Edit ```/mnt/etc/nixos/hardware-configuration.nix``` or insert boostrap_hardware.nix into it.
 
    ```bash
-    sudo curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/persist/.config/nixos/systems/configuration_bootstrap.nix -o /mnt/etc/nixos/configuration.nix
+    curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/basic/hardware_bootstrap.nix -o hardware_bootstrap.nix
    ```
 
-7. Edit ```/mnt/etc/nixos/hardware-configuration.nix``` or insert boostrap_hardware.nix into it.
+6. Install OS using ````sudo nixos-install````
 
-   ```bash
-    curl -sSL https://raw.githubusercontent.com/jbgreer/Nixfiles/persist/hardware_bootstrap.nix -o hardware_bootstrap.nix
-   ```
+7. Reboot
 
-8. Install OS using ````sudo nixos-install````
+8. Login as root
 
-9. Reboot
-
-10. Login as root
-
-10. Set password for non-root user
+9. Set password for non-root user
 
    ```bash
     passwd USER
    ```
 
-11. Logout and back in as USER
+10. Logout and back in as USER
 
-10.  Reconnect to the network using NetworkManager
+11.  Reconnect to the network using NetworkManager
 
    ```bash
    nmcli device wifi connect SID password PASSWD
@@ -86,13 +78,13 @@ Note: This option does not exist yet for home-manager flake configurations.
 
 TODO
 
-14. Modify ```/etc/nixos/configuration.nix```.
+12. Modify ```/etc/nixos/configuration.nix```.
 
-15. Copy `/etc/nixos/hardware-configuration.nix` into the systems folder to match the hostname.
+13. Copy `/etc/nixos/hardware-configuration.nix` into the systems folder to match the hostname.
 
-16. Reboot again.
+14. Reboot again.
 
-17. Install Home Manager
+15. Install Home Manager
 
    ```bash
    nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz home-manager
@@ -101,7 +93,7 @@ TODO
    nix-shell '<home-manager>' -A install
    ```
 
-18. Use flake for initial generation
+16. Use flake for initial generation
 
 If at first you don't succeed, you're about average.
 

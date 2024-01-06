@@ -17,6 +17,11 @@ sudo cryptsetup --verify-passphrase -v luksFormat $DISK'p1'
 # >>> YES; create passphrase for LUKS partition
 sudo cryptsetup open $DISK'p1' enc
 # re-enter passphrase to open LUKS partition for more partition management
+#
+[ -d /var/mapper/enc ] && {
+	echo "Crypsetup failed"
+	exit 1
+}
 
 # setup LVN, with root & swap logical volumes
 # Initialize volumegroup `pool`
