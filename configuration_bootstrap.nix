@@ -37,6 +37,7 @@
     curl
     git
     neovim
+    sbctl
   ];
 
   # set neovim as default editor

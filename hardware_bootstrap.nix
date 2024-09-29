@@ -1,10 +1,11 @@
 # hardware_bootstrap.nix
 
   # encrypted root partition
-  boot.initrd.luks.devices."enc" = {
-    device = "/dev/disk/by-partlabel/ROOTPART";
-    preLVM = true;
-  };
+  boot.initrd.luks.devices."enc" =
+    {
+      device = "/dev/disk/by-partlabel/ROOTPART";
+      preLVM = true;
+    };
 
   # btrfs subvolumes on rootfs
   fileSystems."/" =
