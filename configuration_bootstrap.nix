@@ -44,9 +44,9 @@
     enable = true;
     defaultEditor = true;
   };
-  
+
   # WARNING! Be careful when changing.
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 
   # Enable use of flakes
   nix.settings.experimental-features = "nix-command flakes";

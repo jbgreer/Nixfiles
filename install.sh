@@ -1,7 +1,8 @@
 set -x
 
-# parition root and boot
+# partition root and boot
 DISK=/dev/nvme0n1
+sudo wipefs -a -f $DISK
 sudo parted $DISK -- mklabel gpt
 sudo parted $DISK -- mkpart ROOTPART 512MB 100%
 sudo parted $DISK -- mkpart ESPPART fat32 1MB 512MB
