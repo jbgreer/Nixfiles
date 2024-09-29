@@ -67,12 +67,12 @@
   swapDevices =
     [ { device = "/dev/disk/by-label/SWAPFS"; }
     ];
-  
+
   nixpkgs.hostPlatform = "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = true;
 
   # Enable LVFS testing to get UEFI updates
-  # Enable firmware updates 
+  # Enable firmware updates
   services.fwupd = {
     enable = true;
     extraRemotes = [ "lvfs-testing" ];
@@ -101,7 +101,7 @@
     description = "Jim Greer";
     extraGroups = [ "networkmanager" "wheel" ];
   };
-  
+
   # packages for root that would otherwise be in home-manager
   users.users.root.packages = with pkgs; [
     bind
@@ -113,6 +113,7 @@
     dmidecode
     git
     pciutils
+    sbctl
   ];
 
   networking.useDHCP = lib.mkDefault true;
@@ -134,7 +135,7 @@
   };
 
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 
   nix.settings.experimental-features = "nix-command flakes";
 }

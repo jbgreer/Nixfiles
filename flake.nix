@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixos-pkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+    nixos-pkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     home-manager = {
@@ -10,7 +10,7 @@
 
     # speccific module suport for hardware
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
- 
+
     # fw ectool for Framework 13-inch 7040 AMD - TODO check status
     fw-ectool = {
       url = "github:tlvince/ectool.nix";
@@ -18,7 +18,7 @@
     };
   };
 
-  outputs = { nixpkgs, ... }@inputs: 
+  outputs = { nixpkgs, ... }@inputs:
     let
       system = "x86_64-linux";
       lib= inputs.nixos-pkgs.lib;
@@ -55,7 +55,7 @@
         modules = homeModules ++ userModules;
       });
 
-      # fn for nixos config 
+      # fn for nixos config
       nixosSystem = (systemModules: lib.nixosSystem {
         inherit system;
         modules = systemModules ++ osModules;
@@ -65,7 +65,7 @@
 
       homeConfigurations = {
         jbgreer = homeUser [ ./.config/nixos/users/jbgreer.nix ];
-      }; 
+      };
 
       nixosConfigurations = {
 
